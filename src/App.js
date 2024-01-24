@@ -36,6 +36,20 @@ const App = () => {
     setEditRowIndex(null);
   };
 
+  const handleEditSubmit = (editedData) => {
+    // Custom logic to handle the edited data
+    // Update the data in the table
+    setTableData((prevData) => {
+      const updatedData = [...prevData];
+      updatedData[editRowIndex] = editedData;
+      return updatedData;
+    });
+    
+    // Close the modal
+    setIsModalOpen(false);
+    setEditRowIndex(null);
+  };
+
   return (
     <div className="max-w-md mx-auto mt-8">
       <Form onSubmit={handleFormSubmit} />
@@ -46,7 +60,7 @@ const App = () => {
 
       <EditModal
         isOpen={isModalOpen}
-        onEdit={() => { /* handle edit logic */ }}
+        onEdit={handleEditSubmit} // Pass the handleEditSubmit function
         onCancel={() => setIsModalOpen(false)}
       />
     </div>
